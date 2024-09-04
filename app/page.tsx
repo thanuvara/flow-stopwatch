@@ -122,21 +122,23 @@ const AnimatedStopwatch: React.FC = () => {
               </p>
             </div>
           ) : (
-            <h2 className="text-xl font-bold mb-2">Lap Times</h2>
+            <>
+              <h2 className="text-xl font-bold mb-2">Lap Times</h2>
+              {[...laps].reverse().map((lap, index) => (
+                <div
+                  key={laps.length - index}
+                  className="flex flex-row items-center space-x-2 mb-1 justify-between"
+                >
+                  <span className="flex items-center justify-center text-xs bg-gray-700 text-gray-50 w-16 text-center py-0.5 rounded-md">
+                    Lap {laps.length - index}
+                  </span>
+                  <span className="text-lg text-right w-full">
+                    {formatTime(lap)}
+                  </span>
+                </div>
+              ))}
+            </>
           )}
-          {laps.map((lap, index) => (
-            <div
-              key={index}
-              className="flex flex-row items-center space-x-2 mb-1 justify-between"
-            >
-              <span className="flex items-center justify-center text-xs bg-gray-700 text-gray-50 w-16 text-center py-0.5 rounded-md">
-                Lap {index + 1}
-              </span>
-              <span className="text-lg text-right w-full">
-                {formatTime(lap)}
-              </span>
-            </div>
-          ))}
         </div>
       </div>
     </div>
