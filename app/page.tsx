@@ -118,7 +118,7 @@ const AnimatedStopwatch: React.FC = () => {
                 No lap times
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                Start the timer and click 'Lap' to record times.
+                Start the timer and click &apos;Lap&apos; to record times.
               </p>
             </div>
           ) : (
