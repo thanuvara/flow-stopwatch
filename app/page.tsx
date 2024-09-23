@@ -91,8 +91,9 @@ const AnimatedStopwatch: React.FC = () => {
     dotPosition !== null ? getPointAtLength(dotPosition) : { x: 0, y: 0 };
 
   const totalLength = pathRef.current?.getTotalLength() || 0;
-  const dashArray = `${dotPosition}, ${totalLength - dotPosition}`;
-  const dashOffset = dotPosition !== null ? -dotPosition : 0;
+  const safeDotPosition = dotPosition ?? 0; // Provide a default value of 0 if dotPosition is null
+  const dashArray = `${safeDotPosition}, ${totalLength - safeDotPosition}`;
+  const dashOffset = -safeDotPosition;
 
   const pathStrokeColor =
     revolutions % 2 === 0 ? "#FFFFFF" : "rgba(255, 255, 255, 0.2)";
@@ -118,7 +119,6 @@ const AnimatedStopwatch: React.FC = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               fill="none"
-              style={{ animation: "fadeIn 0.25s forwards 0.25s" }}
             />
             <path
               d={path}
@@ -130,7 +130,7 @@ const AnimatedStopwatch: React.FC = () => {
               strokeDasharray={dashArray}
               strokeDashoffset={dashOffset}
               className="path"
-              style={{ animation: "fadeIn 0.25s forwards 0.25s" }}
+              style={{ opacity: 0, animation: "fadeIn 0.5s forwards 0.5s" }}
             />
             <circle
               cx={dotPositionOnPath.x}
